@@ -50,39 +50,43 @@ public class RiscVSimulator extends JFrame {
         buttonPanel.add(runButton);
         add(buttonPanel, BorderLayout.NORTH);
 
-        // Painel central: Displays organizados para se aproximar do layout no PDF
-        JPanel displayPanel = new JPanel(new GridLayout(2, 3));
-
-        // Sinais de Controle
-        signalsArea = new JTextArea();
-        signalsArea.setEditable(false);
-        displayPanel.add(new JScrollPane(signalsArea));
+        JPanel esquerda = new JPanel(new GridLayout(1,2));
+        JPanel direita = new JPanel(new GridLayout(2,2));
 
         // Registradores
-        registersArea = new JTextArea();
+        registersArea = new JTextArea(2,2);
         registersArea.setEditable(false);
-        displayPanel.add(new JScrollPane(registersArea));
+        esquerda.add(new JScrollPane(registersArea));
 
         // Memória
-        memoryArea = new JTextArea();
+        memoryArea = new JTextArea(2,2);
         memoryArea.setEditable(false);
-        displayPanel.add(new JScrollPane(memoryArea));
+        esquerda.add(new JScrollPane(memoryArea));
+
+        // Sinais de Controle
+        signalsArea = new JTextArea(1,1);
+        signalsArea.setEditable(false);
+        direita.add(new JScrollPane(signalsArea));
 
         // Programa carregado (como "teste1 - Bloco de Notas")
-        programArea = new JTextArea();
+        programArea = new JTextArea(1,1);
         programArea.setEditable(false);
-        displayPanel.add(new JScrollPane(programArea));
+        direita.add(new JScrollPane(programArea));
 
         // Próxima Instrução
-        nextInstructionArea = new JTextArea();
+        nextInstructionArea = new JTextArea(1,1);
         nextInstructionArea.setEditable(false);
-        displayPanel.add(new JScrollPane(nextInstructionArea));
+        direita.add(new JScrollPane(nextInstructionArea));
 
         // PC
         pcLabel = new JLabel("PC: 0");
-        displayPanel.add(pcLabel);
+        direita.add(pcLabel);
 
-        add(displayPanel, BorderLayout.CENTER);
+        esquerda.setPreferredSize(new Dimension(350, 0));
+
+        add(esquerda, BorderLayout.WEST);
+        add(direita, BorderLayout.CENTER);
+        // add(displayPanel, BorderLayout.CENTER);
 
         // Ações dos botões
         loadButton.addActionListener(new ActionListener() {
